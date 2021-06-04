@@ -1,0 +1,44 @@
+version: "3.3"
+
+services:
+  api:
+    container_name: "api"
+    build: ./api
+    hostname: api
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - mailer
+    env_file:
+      - ./api/.env
+    networks:
+      - rabbit_network
+
+  mailer:
+    container_name: "mailer"
+    build: ./mailer
+    hostname: mailer
+    restart: always
+    depends_on:
+      - rabbitmq
+    env_file:
+      - ./mailer/.env
+    networks:
+      - rabbit_network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: "rabbitmq"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbit_network
+
+networks:
+  rabbit_network:
+    driver: bridge
