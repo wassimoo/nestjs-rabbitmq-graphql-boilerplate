@@ -36,8 +36,8 @@ export const microserviceClients = [
   ],
   controllers: [ApiController],
   providers: [
-    ClientsFactory,
     ConfigService,
+    ClientsFactory,
 
     // Resolvers
     LoginResolver,

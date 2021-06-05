@@ -27,6 +27,18 @@ services:
     networks:
       - rabbit_network
 
+  users:
+    container_name: "users"
+    build: ./users
+    hostname: users
+    restart: always
+    depends_on:
+      - rabbitmq
+    env_file:
+      - ./users/.env
+    networks:
+      - rabbit_network
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: "rabbitmq"
