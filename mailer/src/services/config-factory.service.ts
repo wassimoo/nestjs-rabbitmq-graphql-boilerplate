@@ -9,11 +9,17 @@ export class ConfigFactory {
   };
 
   constructor(private configService: ConfigService) {
-    this._config.mailerService = {
+    this._config = {
+      mailerService: this.getDefaultMQConfig('MAILER_QUEUE'),
+    };
+  }
+
+  private getDefaultMQConfig(queueKey: string) {
+    return {
       transport: Transport.RMQ,
       options: {
-        urls: [configService.get('MQ_URL')],
-        queue: configService.get('MAILER_QUEUE'),
+        urls: [this.configService.get('MQ_URL')],
+        queue: this.configService.get(queueKey),
         queueOptions: {
           durable: false,
         },
