@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { MailerModule } from './mailer.module';
@@ -10,10 +11,7 @@ async function bootstrap() {
     configFactory.config.mailerService,
   );
   app.startAllMicroservices(() =>
-    console.log(
-      'Mailer service is running with config',
-      configFactory.config.mailerService,
-    ),
+    Logger.log('Mailer service started successfully'),
   );
 }
 bootstrap();

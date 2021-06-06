@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { ClientsFactory } from './services/clients-factory.service';
@@ -10,10 +11,7 @@ async function bootstrap() {
     clientsFactory.config.userService,
   );
   app.startAllMicroservices(() =>
-    console.log(
-      'User service is running with config',
-      clientsFactory.config.userService,
-    ),
+    Logger.log('User service started successfully'),
   );
 }
 bootstrap();
