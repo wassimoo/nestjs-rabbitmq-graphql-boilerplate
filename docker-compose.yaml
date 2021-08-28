@@ -8,8 +8,12 @@ services:
     ports:
       - "3000:3000"
     restart: always
+    command: npm run start:debug
+    working_dir: /var/www/api
+    volumes:
+      - ./api:/var/www/api
     depends_on:
-      - mailer
+      - rabbitmq
     env_file:
       - ./api/.env
     networks:
@@ -20,6 +24,10 @@ services:
     build: ./mailer
     hostname: mailer
     restart: always
+    command: npm run start:debug
+    working_dir: /var/www/mailer
+    volumes:
+      - ./mailer:/var/www/mailer
     depends_on:
       - rabbitmq
     env_file:
@@ -32,6 +40,10 @@ services:
     build: ./users
     hostname: users
     restart: always
+    command: npm run start:debug
+    working_dir: /var/www/users
+    volumes:
+      - ./users:/var/www/users
     depends_on:
       - rabbitmq
     env_file:

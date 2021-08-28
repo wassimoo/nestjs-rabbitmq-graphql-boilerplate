@@ -10,6 +10,6 @@ export class LoginResolver {
 
   @Query(() => String)
   login() {
-    return 'Hello from login!';
+    return 'Hello from login ';
   }
 }
