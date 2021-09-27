@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LoggerLevel, LoggerModule, LoggerService } from '@nueverahr/logger';
+import { LoggerModule } from '@nueverahr/logger';
 import { ClientsFactory } from './services/clients-factory.service';
 import { UserModule } from './user/user.module';
 
@@ -11,13 +11,13 @@ import { UserModule } from './user/user.module';
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRoot(),
     LoggerModule.forRoot({
       logDirPath: './logs',
     }),
+    TypeOrmModule.forRoot(),
     UserModule,
   ],
-  exports: [LoggerModule],
-  providers: [ConfigService, ClientsFactory],
+  exports: [ConfigModule, LoggerModule],
+  providers: [ClientsFactory],
 })
 export class MainModule {}
