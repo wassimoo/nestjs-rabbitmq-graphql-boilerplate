@@ -1,4 +1,4 @@
-# NestJS RabbitQ GraphQL Starter
+# NestJS RabbitQ GraphQL Boilerplate
 A quick starter template for NestJS, RabbitMQ, and GraphQL lovers with support for container native development.
 
 ## Usage
